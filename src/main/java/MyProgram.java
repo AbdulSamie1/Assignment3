@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*; 
 import java.util.Scanner;
 class importingfiles extends Exception implements Runnable {
-	BinarySearchTree tree = new BinarySearchTree();
+	BinarySearchTree tree = new BinarySearchTree(null);
 	public int cVocab = 0;
 	public String[] vocab;
 	int cInp1 = 0;
@@ -269,7 +269,7 @@ class importingfiles extends Exception implements Runnable {
 }
 
 class query extends Exception implements Runnable{
-	BinarySearchTree tree = new BinarySearchTree();
+	BinarySearchTree tree = new BinarySearchTree(null);
 	public int cVocab = 0;
 	public String[] vocab;
 	int cInp1 = 0;
@@ -294,6 +294,12 @@ class query extends Exception implements Runnable{
 		try {
 			System.out.println("Enter a string for query. \n");
 			iPath = in.nextLine();
+			///////////////////////////////////////////////////////////Exception Handling
+			if(iPath == null) {
+				throw new query("Query cannot be null...\n",null,null);
+				
+			}
+			////////////////////////////////////////////////////////////
 			iPath = iPath.toLowerCase();
 			File file = new File(vPath);
 			BufferedReader ln1

@@ -1,5 +1,5 @@
 import java.util.*;
-public class BinarySearchTree{
+public class BinarySearchTree extends Exception{
 	String data;
 	BinarySearchTree parent;  
 	BinarySearchTree left;    
@@ -8,13 +8,14 @@ public class BinarySearchTree{
 	static int szie=0; 
 	static BinarySearchTree root; 
 
-	public BinarySearchTree(){
+	BinarySearchTree(String message){
+		super(message);
 		parent=null;
 		left=null;
 		right=null;
 	}	
 	public void add(String str){
-		BinarySearchTree node = new BinarySearchTree();
+		BinarySearchTree node = new BinarySearchTree(null);
 		node.data=str;
 		
 		if(szie==0){
@@ -53,11 +54,11 @@ public class BinarySearchTree{
 		}
 		szie++;
 	}
-	public void display() throws Exception {
+	public void display() throws BinarySearchTree{
 		System.out.print("The Tree is : ");
 		if(root==null){
 			System.out.println("Tree is empty...");
-			return;
+			throw new BinarySearchTree("Breaking program...");
 		}
 			inOrderDisplay(root);
 			System.out.println();
@@ -67,13 +68,13 @@ public class BinarySearchTree{
 			return root;
 		}
 		inOrderDisplay(root.left);
-		System.out.print(root.data + " ");
+		System.out.print(root.data + "\n");
 		inOrderDisplay(root.right);
 		return root;
 	}
-	public boolean findNode(String str)throws Exception{
+	public boolean findNode(String str) throws BinarySearchTree{
 		if(root==null){
-			throw new Exception("Empty tree!");
+			throw new BinarySearchTree("The tree is already empty!");
 		}
 		BinarySearchTree temp = root;
 		boolean result=false;
